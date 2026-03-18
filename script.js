@@ -301,7 +301,7 @@ function resetActivity() {
     // Per-second emission rates
     var CO2_RATE    = 2.5;       // tons / second
     var FOREST_RATE = 0.3;       // hectares / second
-    var TEMP_RATE   = 0.000005;  // °C / second (visible slow drift)
+    var TEMP_RATE   = 0;         // °C / second (static)
 
     // Seconds elapsed since local midnight (gives today's accumulated baseline)
     function secondsSinceMidnight() {
@@ -322,7 +322,7 @@ function resetActivity() {
     // Baseline values already accumulated before page load
     var baseCO2    = sinceDay  * CO2_RATE;
     var baseForest = sinceDay  * FOREST_RATE;
-    var baseTemp   = 1.35 + sinceYear * TEMP_RATE; // current anomaly ≈ +1.35°C, drifting upward
+    var baseTemp   = 0.6;
 
     var elCO2    = document.getElementById('num-co2');
     var elForest = document.getElementById('num-forest');
@@ -342,7 +342,7 @@ function resetActivity() {
     }
 
     function formatTemp(n) {
-        return '+' + n.toFixed(6);
+        return n.toFixed(1);
     }
 
     function tick(timestamp) {
